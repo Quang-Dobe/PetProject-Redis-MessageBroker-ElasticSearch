@@ -15,8 +15,20 @@ namespace Services.First.Utils
                 HostName = config.HostName,
                 Port = AmqpTcpEndpoint.UseDefaultPort,
                 UserName = config.UserName,
-                Password = config.Password
+                Password = config.Password,
             });
+
+            ConfigConnectionFactory();
+        }
+
+        private void ConfigConnectionFactory()
+        {
+            this._lazyConnection.Value.ClientProperties["capabilities"] = new Dictionary<string, object>
+            {
+                { "publisher_confirms", true },
+                { "exchange_exchange_bindings", true },
+                { "consumer_cancel_notify", true }
+            };
         }
     }
 }

@@ -18,6 +18,18 @@ namespace Services.Second.Utils
                 Password = config.Password,
                 VirtualHost = config.VirtualHost,
             });
+
+            ConfigConnectionFactory();
+        }
+
+        private void ConfigConnectionFactory()
+        {
+            this._lazyConnection.Value.ClientProperties["capabilities"] = new Dictionary<string, object>
+            {
+                { "publisher_confirms", true },
+                { "exchange_exchange_bindings", true },
+                { "consumer_cancel_notify", true }
+            };
         }
     }
 }
