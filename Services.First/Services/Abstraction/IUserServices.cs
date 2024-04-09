@@ -1,4 +1,4 @@
-﻿using Services.First.Data;
+﻿using Services.Data.Core;
 
 namespace Services.First.Services.Abstraction
 {

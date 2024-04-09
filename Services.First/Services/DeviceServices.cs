@@ -5,42 +5,42 @@ using Services.First.Services.Abstraction;
 
 namespace Services.First.Services
 {
-    public class UserServices : IUserServices
+    public class DeviceServices : IDeviceServices
     {
-        private readonly IUserRepositories _repository;
+        private readonly IDeviceRepositories _repository;
 
-        public UserServices(IUserRepositories repositories)
+        public DeviceServices(IDeviceRepositories repositories)
         {
             _repository = repositories;
         }
 
-        public async Task<User> GetSingleAsync(Guid id)
+        public async Task<Device> GetSingleAsync(Guid id)
         {
             return await _repository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task AddSingleAsync(User user)
+        public async Task AddSingleAsync(Device device)
         {
-            _repository.Add(user);
+            _repository.Add(device);
 
             await _repository.SaveChangeAsync();
         }
 
         public async Task DeleteSingleAsync(Guid id)
         {
-            var user = await GetSingleAsync(id);
+            var device = await GetSingleAsync(id);
 
-            if (user != null)
+            if (device != null)
             {
-                _repository.Delete(user);
+                _repository.Delete(device);
 
                 await _repository.SaveChangeAsync();
             }
         }
 
-        public async Task UpdateSingleAsync(User user)
+        public async Task UpdateSingleAsync(Device device)
         {
-            _repository.Update(user);
+            _repository.Update(device);
 
             await _repository.SaveChangeAsync();
         }

@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Services.First;
+using Services.First.Repositories;
+using Services.First.Repositories.Abstraction;
 using Services.First.Services;
 using Services.First.Services.Abstraction;
 using Services.First.Utils;
@@ -11,7 +15,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ServiceDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ServiceDb")));
+
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IDeviceServices, DeviceServices>();
+builder.Services.AddScoped<IUserRepositories, UserRepositories>();
+builder.Services.AddScoped<IDeviceRepositories, DeviceRepositories>();
 builder.Services.AddScoped<ICacheServices, CacheServices>();
 builder.Services.AddScoped<IMessageBrokerServices, MessageBrokerServices>();
 builder.Services.AddSingleton<MessageBrokerHelper>();
