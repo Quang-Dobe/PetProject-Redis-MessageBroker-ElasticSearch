@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Services.Second.Utils;
-using System.Diagnostics.Metrics;
 using System.Text;
 
 namespace Services.Second
