@@ -2,10 +2,8 @@
 
 namespace Services.Data.Core
 {
-    public class User
+    public class User : Base
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Email { get; set; }
@@ -14,9 +12,9 @@ namespace Services.Data.Core
 
         public string Password { get; set; }
 
-        public Guid DeviceId { get; set; }
+        public Guid? DeviceId { get; set; }
 
         [ForeignKey(nameof(DeviceId))]
-        public Device Device { get; set; }
+        public Device? Device { get; set; }
     }
 }
