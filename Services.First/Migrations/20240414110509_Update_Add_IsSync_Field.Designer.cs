@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Services.First;
 
@@ -11,9 +12,11 @@ using Services.First;
 namespace Services.First.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    partial class ServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414110509_Update_Add_IsSync_Field")]
+    partial class Update_Add_IsSync_Field
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace Services.First.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DeviceId")
+                    b.Property<Guid>("DeviceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -86,7 +89,9 @@ namespace Services.First.Migrations
                 {
                     b.HasOne("Services.Data.Core.Device", "Device")
                         .WithMany("Users")
-                        .HasForeignKey("DeviceId");
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Device");
                 });

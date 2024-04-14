@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Services.Data.Core;
 
-namespace Services.Data.EntityConfiguration
+namespace Services.First.EntityConfiguration
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {
